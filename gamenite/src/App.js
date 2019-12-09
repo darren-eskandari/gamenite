@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import NavBar from './components/NavBar'
+import ShowGame from './components/ShowGame'
 
+
+import meeple from '../src/assets/images/meeple.jpg'
 
 import * as ROUTES from './constants/routes';
 import { firebase } from './firebase/firebase';
 
-import meeple from '../src/assets/images/meeple.jpg'
 
 import './App.css';
 
@@ -43,6 +45,7 @@ class App extends Component {
           <Route exact path={ROUTES.HOME} render={() => <div>home</div>} />
           <Route exact path={ROUTES.LOGIN} render={() => <div>login</div>} />
           <Route exact path={ROUTES.SIGN_UP} render={() => <div>sign up</div>} />
+          <Route exact path={`${ROUTES.GAMES}/:id`} component={ ShowGame }/>
         </Switch>
       </div>
     );
