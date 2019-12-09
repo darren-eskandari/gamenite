@@ -7,7 +7,10 @@ import NavBar from './components/NavBar'
 import * as ROUTES from './constants/routes';
 import { firebase } from './firebase/firebase';
 
+import meeple from '../src/assets/images/meeple.jpg'
+
 import './App.css';
+
 
 class App extends Component {
 
@@ -25,7 +28,11 @@ class App extends Component {
       <div className="App">
         <NavBar />
 
-        <h1>Hello World</h1>
+        <div className="welcome">
+          <div className="imageCenterer">
+            <img className="splashImg" src={meeple}/>
+          </div>
+        </div>
         <Switch>
           <Route exact path={ROUTES.HOME} render={() => <div>home</div>} />
           <Route exact path={ROUTES.LOGIN} render={() => <div>login</div>} />
