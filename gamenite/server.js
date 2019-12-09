@@ -6,6 +6,9 @@ const PORT      = process.env.PORT || 8000
 
 require('./config/db')
 
+const userController = require('./controllers/users')
+
+app.use('/auth', userController)
 
 
 

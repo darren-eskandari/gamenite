@@ -20,6 +20,12 @@ class App extends Component {
     profilePic: null
   }
 
+  async componentDidMount() {
+    const user = await fetch('/auth')
+    const userToJson = await user.json()
+    console.log(userToJson)
+  }
+
 
 
   render() {
