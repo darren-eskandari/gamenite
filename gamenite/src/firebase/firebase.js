@@ -23,9 +23,14 @@ const doSignIn = (email, password) =>
     auth.signInWithEmailAndPassword(email, password)
 
 
+
+const doSignOut = () => auth.signOut()
+
+
 export {
     firebase,
     auth,
     doCreateUser,
     doSignIn,
+    doSignOut
 }

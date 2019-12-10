@@ -12,7 +12,9 @@ app.use(express.json())
 
 app.use('/auth', userController)
 
-
+app.get('/api/v1/welcome', (req, res) => {
+    res.json({ message: '' })
+})
 
 app.listen(PORT, () => {
     console.log(`Running on PORT ${PORT}`)

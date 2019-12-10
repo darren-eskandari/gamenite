@@ -20,7 +20,8 @@ class Login extends Component {
         const { email, password } = this.state
         doSignIn(email, password)
             .then(authUser => {
-                console.log(authUser)
+                console.log('auth user object', authUser)
+                console.log('auth user email', authUser.user.email)
                 this.props.history.push(ROUTES.HOME)
             })
             .catch(error => {

@@ -10,7 +10,7 @@ import Login from './components/Login'
 
 
 import * as ROUTES from './constants/routes'
-import { firebase, auth } from './firebase/firebase';
+import { firebase, auth, doSignOut } from './firebase/firebase';
 
 import './App.css';
 import meeple from '../src/assets/images/meeple.jpg'
@@ -25,22 +25,50 @@ class App extends Component {
   }
 
   async componentDidMount() {
-    const user = await fetch('/auth')
+    const user = await fetch('/api/v1/welcome')
     const userToJson = await user.json()
     console.log(userToJson)
 
-    
+    auth.onAuthStateChanged(authUser => {
+      console.log('auth state change', authUser)
+      authUser
+      ? this.setState({ 
+        currentUser: {
+          displayName: authUser.email,
+      }
+      })
+      : this.setState({ currentUser: null })
+    })
 
+  }
+
+  doSetCurrentUser = currentUser => {
+    this.setState({
+      currentUser
+    })
+    console.log(currentUser)
   }
 
 
 
-
   render() {
+    
+    const { currentUser } = this.state
 
     return (
+
       <div className="App">
         <NavBar />
+ 
+        {
+          currentUser
+          ? <div>
+            {currentUser.displayName}
+            <button onClick={doSignOut}>Sign Out</button>
+            <img src={currentUser.imgUrl} />
+          </div>
+          : null
+        }
 
         <div className="welcome">
           <div className="imageCenterer">
