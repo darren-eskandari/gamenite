@@ -21,8 +21,13 @@ router.post('/users', async (req, res) => {
     }
 });
 
-router.get('/users/:userId', (req, res) => {
-    return console.log(`user is ${req.params.userId}`);
+router.get('/users/:userId', async(req, res) => {
+    try {
+        const foundUser = await User.find({uid: req.params.userId})
+        res.json(foundUser)
+    } catch(err) {
+        console.log(err)
+    }
 })
 
 

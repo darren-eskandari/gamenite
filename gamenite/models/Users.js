@@ -4,7 +4,6 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
     email: {type: String, required: true, unique: true},
-    password: {type: String, required: true},
     displayName: {type: String, unique: true},
     imgUrl: String,
     location: String,
@@ -15,6 +14,7 @@ const userSchema = new Schema({
     friends: [{type: Schema.Types.ObjectId, ref: 'User'}],
     friendRequests: [{type: Schema.Types.ObjectId, ref: 'User'}],
     events: [{type: Schema.Types.ObjectId, ref: 'Event'}],
+    uid: String
 });
 
 

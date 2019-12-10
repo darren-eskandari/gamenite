@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, Link } from 'react-router-dom'
 
 import NavBar from './components/NavBar'
 import Games from './components/Games'
 import ShowGame from './components/ShowGame'
+import ShowUser from './components/ShowUser'
 import SignUp from './components/SignUp'
 import Login from './components/Login'
-
 
 
 import * as ROUTES from './constants/routes'
@@ -29,15 +29,14 @@ class App extends Component {
     const userToJson = await user.json()
     console.log(userToJson)
 
-    auth.onAuthStateChanged(authUser => {
-      console.log('auth state change', authUser)
-      authUser
-      ? this.setState({ 
-        currentUser: {
-          displayName: authUser.email,
+    auth.onAuthStateChanged(async authUser => {
+      if(authUser) {
+        const currentUser = await fetch(`/auth/users/${authUser.uid}`)
+        const currentUserToJson = await currentUser.json()
+        this.setState({ 
+          currentUser: currentUserToJson[0]
+        })
       }
-      })
-      : this.setState({ currentUser: null })
     })
 
   }
@@ -63,9 +62,8 @@ class App extends Component {
         {
           currentUser
           ? <div>
-            {currentUser.displayName}
+              <Link to={`${ROUTES.USERS}/${currentUser._id}`}>Welcome {currentUser.displayName}</Link>
             <button onClick={doSignOut}>Sign Out</button>
-            <img src={currentUser.imgUrl} />
           </div>
           : null
         }
@@ -77,8 +75,9 @@ class App extends Component {
         </div>
         <Switch>
           <Route exact path={ROUTES.HOME} render={() => <div>home</div>} />
-          <Route exact path={ROUTES.LOGIN} component={Login} />
-          <Route exact path={ROUTES.SIGN_UP} component={ SignUp } />
+          <Route exact path={ROUTES.LOGIN} component={ Login } />
+          <Route exact path={ROUTES.SIGN_UP} render={() =>  <SignUp doSetCurrentUser={this.doSetCurrentUser} />} />
+          <Route exact path={`${ROUTES.USERS}/:id`} component={ ShowUser } />
           <Route exact path={`${ROUTES.GAMES}`} component={ Games }/>
           <Route exact path={`${ROUTES.GAMES}/:id`} component={ ShowGame } />
         </Switch>
