@@ -9,17 +9,33 @@ class SignUp extends Component {
         email: '',
         password: '',
         confirmPassword: '',
-        error: null,
-        
+        error: null
     }
 
-    
+    onChange = e =>
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+
 
     render() {
     
+        const { email, password, confirmPassword, error } = this.state
+        const isInvalid =
+            password !== confirmPassword ||
+            password === '' ||
+            email === ''
+            
         return (
-            <div>
+            <div className="sign-up">
                 Sign Up
+                <form onSubmit={this.onSubmit}>
+                    <input type='text' name='email' value={email} placeholder="EMAIL" onChange={this.onChange}/>
+                    <input type='text' name='password' value={password} placeholder="PASSWORD" onChange={this.onChange}/>
+                    <input type='text' name='confirmPassword' value={confirmPassword} placeholder="PASSWORD" onChange={this.onChange}/>
+                    <input type='submit' value='submit' disabled={isInvalid}/>
+                    {error && <p>{error.message}</p>}
+                </form>
             </div>
         )
     

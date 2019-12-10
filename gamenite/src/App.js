@@ -43,7 +43,7 @@ class App extends Component {
         <Switch>
           <Route exact path={ROUTES.HOME} render={() => <div>home</div>} />
           <Route exact path={ROUTES.LOGIN} render={() => <div>login</div>} />
-          <Route exact path={ROUTES.SIGN_UP} render={() => <div>sign up</div>} />
+          <Route exact path={ROUTES.SIGN_UP} component={ SignUp } />
           <Route exact path={`${ROUTES.GAMES}`} component={ Games }/>
           <Route exact path={`${ROUTES.GAMES}/:id`} component={ ShowGame } />
         </Switch>
