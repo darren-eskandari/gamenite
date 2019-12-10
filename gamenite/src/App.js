@@ -1,12 +1,15 @@
-import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import React, { Component } from 'react'
+import { Route, Switch } from 'react-router-dom'
 
 import NavBar from './components/NavBar'
 import Games from './components/Games'
 import ShowGame from './components/ShowGame'
 import SignUp from './components/SignUp'
+import Login from './components/Login'
 
-import * as ROUTES from './constants/routes';
+
+
+import * as ROUTES from './constants/routes'
 import { firebase, auth } from './firebase/firebase';
 
 import './App.css';
@@ -46,7 +49,7 @@ class App extends Component {
         </div>
         <Switch>
           <Route exact path={ROUTES.HOME} render={() => <div>home</div>} />
-          <Route exact path={ROUTES.LOGIN} render={() => <div>login</div>} />
+          <Route exact path={ROUTES.LOGIN} component={Login} />
           <Route exact path={ROUTES.SIGN_UP} component={ SignUp } />
           <Route exact path={`${ROUTES.GAMES}`} component={ Games }/>
           <Route exact path={`${ROUTES.GAMES}/:id`} component={ ShowGame } />

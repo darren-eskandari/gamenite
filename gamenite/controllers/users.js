@@ -19,7 +19,12 @@ router.post('/users', async (req, res) => {
     } catch(err) {
         console.log(err)
     }
-  });
+});
+
+router.get('/users/:userId', (req, res) => {
+    return console.log(`user is ${req.params.userId}`);
+})
+
 
 
 module.exports = router

@@ -19,9 +19,13 @@ const auth = firebase.auth()
 const doCreateUser = (email, password) => 
     auth.createUserWithEmailAndPassword(email, password)
 
+const doSignIn = (email, password) => 
+    auth.signInWithEmailAndPassword(email, password)
+
 
 export {
     firebase,
     auth,
     doCreateUser,
+    doSignIn,
 }
