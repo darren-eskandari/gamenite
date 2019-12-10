@@ -12,11 +12,16 @@ const config = {
 };
 
 const firebase = app.initializeApp(config)
+const auth = firebase.auth()
 
 
 
+const doCreateUser = (email, password) => 
+    auth.createUser(email, password)
 
 
 export {
-    firebase
+    firebase,
+    auth,
+    doCreateUser,
 }

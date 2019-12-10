@@ -2,17 +2,15 @@ import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import NavBar from './components/NavBar'
-import ShowGame from './components/ShowGame'
 import Games from './components/Games'
-
-
-import meeple from '../src/assets/images/meeple.jpg'
+import ShowGame from './components/ShowGame'
+import SignUp from './components/SignUp'
 
 import * as ROUTES from './constants/routes';
 // import { firebase } from './firebase/firebase';
 
-
 import './App.css';
+import meeple from '../src/assets/images/meeple.jpg'
 
 
 class App extends Component {
@@ -39,7 +37,7 @@ class App extends Component {
 
         <div className="welcome">
           <div className="imageCenterer">
-            <img className="splashImg" src={meeple}/>
+            <img className="splashImg" src={meeple}alt="meeple" />
           </div>
         </div>
         <Switch>

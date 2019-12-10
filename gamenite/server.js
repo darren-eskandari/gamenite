@@ -8,6 +8,8 @@ require('./config/db')
 
 const userController = require('./controllers/users')
 
+app.use(express.json())
+
 app.use('/auth', userController)
 
 

@@ -20,7 +20,7 @@ class ShowGame extends Component {
         
 
         const gameJson = await resGame.json()
-        console.log(gameJson)
+        // console.log(gameJson)
         // console.log(gameJson.games[0].name)
 
         this.setState({
@@ -37,11 +37,10 @@ class ShowGame extends Component {
 
 
     render() {
-        console.log(this.state.name)
         return (
             <div className="show-game">
                 <h3>{this.state.name}</h3>
-                <img src={this.state.img} />
+                <img src={this.state.img} alt="preview" />
                 Players: {this.state.minPlayers}-{this.state.maxPlayers}
                 Average Playtime: {this.state.minPlaytime}-{this.state.maxPlaytime}
                 <p>

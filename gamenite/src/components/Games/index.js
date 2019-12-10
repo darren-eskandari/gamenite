@@ -66,7 +66,7 @@ const Games = () => {
                                             game.thumb_url 
                                             &&
                                             <div className="games-thumb-container">
-                                                <img src={game.thumb_url} className="game-thumb-img" />
+                                                <img src={game.thumb_url} className="game-thumb-img" alt="thumbnail" />
                                             </div>
                                         }  
                                     </Link>
