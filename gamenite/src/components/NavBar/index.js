@@ -1,13 +1,15 @@
 import React from "react";
 import { NavLink } from 'react-router-dom'
+import * as ROUTES from '../../constants/routes';
+
 
 const NavBar = () => {
     return(
         <div className="nav">
-            <NavLink to={'home'}>Home</NavLink>
-            <NavLink to={'login'}>Login</NavLink>
-            <NavLink to={'signup'}>Signup</NavLink>
-            <NavLink to={'games'}>Games</NavLink>
+            <NavLink to={ROUTES.HOME}>Home</NavLink>
+            <NavLink to={ROUTES.LOGIN}>Login</NavLink>
+            <NavLink to={ROUTES.SIGN_UP}>Signup</NavLink>
+            <NavLink to={ROUTES.GAMES}>Games</NavLink>
         </div>
     )
 }

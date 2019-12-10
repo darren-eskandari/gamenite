@@ -9,12 +9,12 @@ import './games.css'
 const Games = () => {
 
     const [ games, setGames ] = useState([])
-    const [ search, setSearch ] = useState(['lyssan'])
+    const [ search, setSearch ] = useState([''])
     const [ isLoading, setIsLoading ] = useState(false)
 
     useEffect(() => {
         const fetchData = async () => {
-            const games = await(await fetch(`https://www.boardgameatlas.com/api/search?name=${search}&client_id=${process.env.REACT_APP_BGA_API_KEY}`)).json()
+            const games = await(await fetch(`https://www.boardgameatlas.com/api/search?name=${search}&limit=10&client_id=${process.env.REACT_APP_BGA_API_KEY}`)).json()
 
             setGames(games.games)
             setTimeout(() => setIsLoading(false), 300)
@@ -24,7 +24,7 @@ const Games = () => {
 
     const doGetGames = async () => {
         try {
-            const games = await(await fetch(`https://www.boardgameatlas.com/api/search?name=${search}&client_id=${process.env.REACT_APP_BGA_API_KEY}`)).json()
+            const games = await(await fetch(`https://www.boardgameatlas.com/api/search?name=${search}&fuzzy_match=true&client_id=${process.env.REACT_APP_BGA_API_KEY}`)).json()
             console.log(games)
 
             setGames(games.games)
