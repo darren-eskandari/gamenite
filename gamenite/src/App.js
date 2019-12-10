@@ -7,7 +7,7 @@ import ShowGame from './components/ShowGame'
 import SignUp from './components/SignUp'
 
 import * as ROUTES from './constants/routes';
-// import { firebase } from './firebase/firebase';
+import { firebase, auth } from './firebase/firebase';
 
 import './App.css';
 import meeple from '../src/assets/images/meeple.jpg'
@@ -25,7 +25,11 @@ class App extends Component {
     const user = await fetch('/auth')
     const userToJson = await user.json()
     console.log(userToJson)
+
+    
+
   }
+
 
 
 

@@ -17,7 +17,7 @@ const auth = firebase.auth()
 
 
 const doCreateUser = (email, password) => 
-    auth.createUser(email, password)
+    auth.createUserWithEmailAndPassword(email, password)
 
 
 export {

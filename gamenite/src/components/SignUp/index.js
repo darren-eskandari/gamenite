@@ -17,7 +17,19 @@ class SignUp extends Component {
             [e.target.name]: e.target.value
         })
 
-
+    onSubmit = e => {
+        e.preventDefault()
+        const { email, password } = this.state
+        doCreateUser(email, password)
+            .then(authUser => {
+                console.log(authUser)
+                this.props.history.push(ROUTES.HOME)
+            })
+            .catch(error => {
+                this.setState({ error });
+            });
+    }
+        
     render() {
     
         const { email, password, confirmPassword, error } = this.state
@@ -25,7 +37,7 @@ class SignUp extends Component {
             password !== confirmPassword ||
             password === '' ||
             email === ''
-            
+
         return (
             <div className="sign-up">
                 Sign Up
