@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 import { BeatLoader } from 'react-spinners'
 
-import { GAMES } from '../../constants/routes'
+// import { GAMES } from '../../constants/routes'
 
 const Games = () => {
 
@@ -38,7 +38,24 @@ const Games = () => {
 
     return (
         <div className="game-search">
-            games
+            {
+                isLoading
+                    ? <BeatLoader 
+                        loading={isLoading}
+                    />
+                    : <div>
+                        <input 
+                            name='search' 
+                            value={search} 
+                            placeholder='Find a Game'
+                            onChange={e => setSearch(e.target.value)}
+                         />
+                        <button onClick={() => doGetGames()} >
+                            Find Game
+                        </button>
+                     
+                </div>
+            }  
         </div>
     )
 
