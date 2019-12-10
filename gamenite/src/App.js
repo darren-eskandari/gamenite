@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import NavBar from './components/NavBar'
-import ShowGame from './components/ShowGame'
+// import ShowGame from './components/ShowGame'
 import Games from './components/Games'
 
 
 import meeple from '../src/assets/images/meeple.jpg'
 
 import * as ROUTES from './constants/routes';
-import { firebase } from './firebase/firebase';
+// import { firebase } from './firebase/firebase';
 
 
 import './App.css';

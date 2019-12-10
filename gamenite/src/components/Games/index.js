@@ -24,10 +24,10 @@ const Games = () => {
     const doGetGames = async () => {
 
         try {
-
             const games = await(await fetch(`https://www.boardgameatlas.com/api/search?name=${search}&client_id=${process.env.REACT_APP_BGA_API_KEY}`)).json()
+            console.log(games)
 
-            setGames(games.name)
+            setGames(games.games)
 
         } catch (error) {
             console.log(error)
