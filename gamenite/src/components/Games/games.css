@@ -1,0 +1,9 @@
+.game-results {
+    max-height: 250px;
+    max-width: 200px;
+    margin: auto;
+}
+
+.game-thumb-img {
+    width: 200px
+}
