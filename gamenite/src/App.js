@@ -69,7 +69,7 @@ class App extends Component {
         {
           currentUser
           ? <div>
-              <Link to={`${ROUTES.USERS}/${currentUser._id}`}>Welcome {currentUser.displayName}</Link>
+              <Link to={`${ROUTES.USERS}/${currentUser.uid}`}>Welcome {currentUser.displayName}</Link>
             <button onClick={this.signOut}>Sign Out</button>
           </div>
           : null
@@ -84,7 +84,7 @@ class App extends Component {
           <Route exact path={ROUTES.HOME} render={() => <div>home</div>} />
           <Route exact path={ROUTES.LOGIN} component={ Login } />
           <Route exact path={ROUTES.SIGN_UP} render={() =>  <SignUp doSetCurrentUser={this.doSetCurrentUser} />} />
-          <Route exact path={`${ROUTES.USERS}/:id`} component={ ShowUser } />
+          <Route exact path={`${ROUTES.USERS}/:id`} component={() => <ShowUser currentUser={this.state.currentUser}/>} />
           <Route exact path={`${ROUTES.GAMES}`} component={ Games }/>
           <Route exact path={`${ROUTES.GAMES}/:id`} component={ ShowGame } />
         </Switch>
