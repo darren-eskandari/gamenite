@@ -12,7 +12,7 @@ class EditUser extends Component {
     async componentDidMount() {
        const user = await fetch(`/auth/users/${this.props.match.params.id}`)
        const userToJson = await user.json()
-       console.log(userToJson)
+    //    console.log(userToJson)
        this.setState({
            user: userToJson[0]
        })
@@ -44,18 +44,47 @@ class EditUser extends Component {
                     </div>
 
                     <div class="user-info-vals-column">
-                        <div className="user-info-val">
-                            { this.state.user.displayName }
-                        </div>
-                        <div className="user-info-val">
-                            { this.state.user.email }
-                        </div>
-                        <div className="user-info-val">
-                            { this.state.user.dob }
-                        </div>
-                        <div className="user-info-val">
-                            { this.state.user.location }
-                        </div>
+                        <form className="edit-user-form">
+                            <div className="user-info-val">
+                                <input 
+                                    className="user-edit-input"
+                                    type="text"
+                                    name="displayName"
+                                    onChange={this.handleChange}
+                                    value={ this.state.user.displayName }
+                                    />
+                            </div>
+                            <div className="user-info-val">
+                                <input 
+                                    className="user-edit-input"
+                                    type="text"
+                                    name="displayName"
+                                    onChange={this.handleChange}
+                                    value={ this.state.user.email }
+                                    />
+                            </div>
+                            <div className="user-info-val">
+                                <input 
+                                    className="user-edit-input"
+                                    type="text"
+                                    name="displayName"
+                                    onChange={this.handleChange}
+                                    value={ this.state.user.dob }
+                                    />
+                            </div>
+                            <div className="user-info-val">
+                                <input 
+                                    className="user-edit-input"
+                                    type="text"
+                                    name="displayName"
+                                    onChange={this.handleChange}
+                                    value={ this.state.user.location }
+                                />
+                            </div>
+                            <input 
+                                type="submit" value="Edit Profile"
+                            />
+                        </form>
                     </div>
 
                     <div className="user-info-bio-key">

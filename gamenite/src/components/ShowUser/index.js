@@ -11,7 +11,7 @@ class ShowUser extends Component {
     async componentDidMount() {
        const user = await fetch(`/auth/users/${this.props.match.params.id}`)
        const userToJson = await user.json()
-       console.log(userToJson)
+    //    console.log(userToJson)
        this.setState({
            user: userToJson[0]
        })
