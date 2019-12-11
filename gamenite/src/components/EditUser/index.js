@@ -18,88 +18,104 @@ class EditUser extends Component {
        })
     }
 
+    handleChange = (e) => {
+        this.setState({
+          [e.currentTarget.name]: e.currentTarget.value
+        })
+        console.log(e.currentTarget)
+    }
+
     render() {
         return (
             <div className="user-edit">
                 <Link to={`${ROUTES.USERS}/${this.state.user.uid}`}>Cancel</Link>
-                    
-                <div className="avatar">
-                    <img src="" alt="user pic"/>
-                </div>
-                
-                <div className="user-info">
-                    <div class="user-info-keys-column">
-                        <div className="user-info-key">
-                            Display Name: 
-                        </div>
-                        <div className="user-info-key">
-                            Email: 
-                        </div>
-                        <div className="user-info-key">
-                            Birthday: 
-                        </div>
-                        <div className="user-info-key">
-                            Location: 
-                        </div>
-                    </div>
+                <form className="edit-user-form">
 
-                    <div class="user-info-vals-column">
-                        <form className="edit-user-form">
+                    <div className="avatar">
+                        <img src="" alt="user pic"/>
+                    </div>
+                    
+                    <div className="user-info">
+                        <div class="user-info-keys-column">
+                            <div className="user-info-key">
+                                Display Name: 
+                            </div>
+                            <div className="user-info-key">
+                                Email: 
+                            </div>
+                            <div className="user-info-key">
+                                Birthday: 
+                            </div>
+                            <div className="user-info-key">
+                                Location: 
+                            </div>
+                        </div>
+
+                        <div class="user-info-vals-column">
                             <div className="user-info-val">
-                                <input 
+                                {/* <input 
                                     className="user-edit-input"
                                     type="text"
                                     name="displayName"
                                     onChange={this.handleChange}
-                                    value={ this.state.user.displayName }
-                                    />
+                                    value= */}
+                                    { this.state.user.displayName }
+                                {/* /> */}
+                            </div>
+                            <div className="user-info-val">
+                                {/* <input 
+                                    className="user-edit-input"
+                                    type="email"
+                                    name="email"
+                                    onChange={this.handleChange} 
+                                    value= */}
+                                    { this.state.user.email }
+                                {/* /> */}
+                            </div>
+                            <div className="user-info-val">
+                                <input 
+                                    className="user-edit-input"
+                                    type="date"
+                                    name="dob"
+                                    onChange={this.handleChange}
+                                    value=
+                                    { this.state.user.dob }
+                                />
                             </div>
                             <div className="user-info-val">
                                 <input 
                                     className="user-edit-input"
                                     type="text"
-                                    name="displayName"
+                                    name="location"
                                     onChange={this.handleChange}
-                                    value={ this.state.user.email }
-                                    />
-                            </div>
-                            <div className="user-info-val">
-                                <input 
-                                    className="user-edit-input"
-                                    type="text"
-                                    name="displayName"
-                                    onChange={this.handleChange}
-                                    value={ this.state.user.dob }
-                                    />
-                            </div>
-                            <div className="user-info-val">
-                                <input 
-                                    className="user-edit-input"
-                                    type="text"
-                                    name="displayName"
-                                    onChange={this.handleChange}
+                                    placeholder="location"
                                     value={ this.state.user.location }
                                 />
                             </div>
-                            <input 
-                                type="submit" value="Edit Profile"
-                            />
-                        </form>
-                    </div>
+                        </div>
 
-                    <div className="user-info-bio-key">
-                        About Me: 
-                    </div>
-                    <div className="user-info-bio-val">
-                        { this.state.user.bio }
-                    </div>
-                    <div className="user-library">
-                        My Games: 
-                        <div className="user-game">
-                            (map of games)
+                        <div className="user-info-bio-key">
+                            About Me: 
+                        </div>
+                        <div className="user-info-bio-val">
+                            <textarea 
+                                className="user-edit-input"
+                                name="bio"
+                                onChange={this.handleChange}
+                                value={ this.state.user.bio }
+                            />
+                        </div>
+                        <input 
+                            type="submit" value="Edit Profile"
+                        />
+                        <div className="user-library">
+                            My Games: 
+                            <div className="user-game">
+                                (map of games)
+                            </div>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
         )
     }
