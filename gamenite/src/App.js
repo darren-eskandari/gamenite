@@ -48,6 +48,13 @@ class App extends Component {
     console.log(currentUser)
   }
 
+  signOut = () => {
+    this.setState({
+      currentUser: null
+    })
+    doSignOut()
+  }
+
 
 
   render() {
@@ -63,7 +70,7 @@ class App extends Component {
           currentUser
           ? <div>
               <Link to={`${ROUTES.USERS}/${currentUser._id}`}>Welcome {currentUser.displayName}</Link>
-            <button onClick={doSignOut}>Sign Out</button>
+            <button onClick={this.signOut}>Sign Out</button>
           </div>
           : null
         }

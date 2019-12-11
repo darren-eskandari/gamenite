@@ -3,16 +3,41 @@ import React, { Component } from 'react'
 class ShowUser extends Component {
 
     state = {
-        name: ""
+        displayName: '',
+        imgUrl: '',
+        location: '',
+        dob: '',
+        phone: '',
+        bio: '',
+        library: [],
+        friends: [],
+        friendRequests: [],
+        events: [],
     }
     
     componentDidMount() {
         console.log(this.props.match.params.id)
     }
+
     render() {
         return(
             <div className="user-show">
-                <h1>User hello</h1>
+                <div className="avatar">
+                    <img src="" alt="user pic"/>
+                </div>
+                <div className="user-info">
+                    Display Name: { this.state.displayName }
+                    <br/>
+                    Birthday: { this.state.dob }
+                    <br/>
+                    Location: { this.state.location }
+                    <br/>
+                    About Me: { this.state.bio }
+                    <br/>
+                    My Games: 
+                    <br/>
+                    
+                </div>
             </div>
         )
     }

@@ -4,7 +4,6 @@ const User = require('../models/Users')
 
 router.get('/', (req, res) => {
     console.log('GET HTTP method for user');
-    // res.json({user: "user name"})
 });
 
 router.post('/users', async (req, res) => {
@@ -25,10 +24,16 @@ router.get('/users/:userId', async(req, res) => {
     try {
         const foundUser = await User.find({uid: req.params.userId})
         res.json(foundUser)
+        console.log(foundUser)
     } catch(err) {
         console.log(err)
     }
 })
+
+router.put('/users/:userId', async (req, res) => {
+    const updatedUser = await User.findByIdAndUpdate(req.params.userId, req.body, {new: true})
+    res.json(updatedUser)
+});
 
 
 
