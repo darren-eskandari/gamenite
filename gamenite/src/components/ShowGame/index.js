@@ -1,16 +1,20 @@
 import React, { Component } from 'react'
+import { BeatLoader } from 'react-spinners'
+
+
 
 class ShowGame extends Component {
 
     state = {
         name: "",
-        img: "",
+        img: "", //imgURL
         minPlayers: "",
         maxPlayers: "",
         minPlaytime: "",
         maxPlaytime: "",
         description: "",
         description_preview: "",
+        // gameId: "",
     }
 
     async componentDidMount() {
@@ -39,13 +43,21 @@ class ShowGame extends Component {
     render() {
         return (
             <div className="show-game">
-                <h3>{this.state.name}</h3>
-                <img src={this.state.img} alt="preview" />
-                Players: {this.state.minPlayers}-{this.state.maxPlayers}
-                Average Playtime: {this.state.minPlaytime}-{this.state.maxPlaytime}
-                <p>
+                <div className="game-header">
+                    <h3>{this.state.name}</h3>
+                    Add to Library
+                </div>
+                <div className="game-img">
+                    <img src={this.state.img} alt="preview" />
+                </div>
+                <div className="game-info">
+                    Players: {this.state.minPlayers}-{this.state.maxPlayers}
+                    <br/>
+                    Average Playtime: {this.state.minPlaytime}-{this.state.maxPlaytime}
+                </div>
+                <div className="game-desc">
                     {this.state.description_preview}
-                </p>
+                </div>
             </div>
         )
     }

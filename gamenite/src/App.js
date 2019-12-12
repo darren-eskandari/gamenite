@@ -11,9 +11,9 @@ import Login from './components/Login'
 
 
 import * as ROUTES from './constants/routes'
-import { firebase, auth, doSignOut } from './firebase/firebase';
+import { firebase, auth, doSignOut } from './firebase/firebase'
 
-import './App.css';
+import './App.css'
 import meeple from '../src/assets/images/meeple.jpg'
 
 

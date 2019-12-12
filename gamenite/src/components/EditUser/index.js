@@ -6,7 +6,10 @@ import * as ROUTES from '../../constants/routes'
 class EditUser extends Component {
 
     state = {
-        user: {}
+        user: {},
+        dob: '',
+        location: '',
+        bio: ''
     }
     
     async componentDidMount() {
@@ -18,26 +21,45 @@ class EditUser extends Component {
        })
     }
 
+    handleEdit = async(e) => {
+        e.preventDefault()
+        console.log('hitting edit', this.state)
+        const editData = {
+            dob: this.state.dob,
+            location: this.state.location,
+            bio: this.state.bio
+        }
+        const editedUser = await fetch(`/auth/users/${this.props.currentUser._id}`, {
+            method: "PUT",
+            body: JSON.stringify(editData),
+            headers: {
+                'Content-Type': 'application/json'
+              },
+        })
+        const editedUserToJson = await editedUser.json()
+        console.log(editedUserToJson)
+        this.props.history.push(`${ROUTES.USERS}/${this.props.match.params.id}`)
+    }
+
     handleChange = (e) => {
         this.setState({
-          [e.currentTarget.name]: e.currentTarget.value
+            [e.currentTarget.name]: e.currentTarget.value
         })
-        console.log(e.currentTarget)
     }
 
     render() {
         return (
             <div className="user-edit">
                 <Link to={`${ROUTES.USERS}/${this.state.user.uid}`}>Cancel</Link>
-                <form className="edit-user-form">
+                <form className="edit-user-form" onSubmit={this.handleEdit}>
 
                     <div className="avatar">
                         <img src="" alt="user pic"/>
                     </div>
                     
                     <div className="user-info">
-                        <div class="user-info-keys-column">
-                            <div className="user-info-key">
+                        <div className="user-info-keys-column">
+                            <div className="user-info-key" >
                                 Display Name: 
                             </div>
                             <div className="user-info-key">
@@ -51,7 +73,7 @@ class EditUser extends Component {
                             </div>
                         </div>
 
-                        <div class="user-info-vals-column">
+                        <div className="user-info-vals-column">
                             <div className="user-info-val">
                                 {/* <input 
                                     className="user-edit-input"
@@ -78,8 +100,10 @@ class EditUser extends Component {
                                     type="date"
                                     name="dob"
                                     onChange={this.handleChange}
-                                    value=
-                                    { this.state.user.dob }
+                                    // placeholder={
+                                    //     this.state.user.dob ?
+                                    //     this.state.user.dob 
+                                    // }
                                 />
                             </div>
                             <div className="user-info-val">
@@ -88,8 +112,11 @@ class EditUser extends Component {
                                     type="text"
                                     name="location"
                                     onChange={this.handleChange}
-                                    placeholder="location"
-                                    value={ this.state.user.location }
+                                    placeholder={
+                                        this.state.user.location ?
+                                        this.state.user.location :
+                                        "location"
+                                    }
                                 />
                             </div>
                         </div>
@@ -102,7 +129,11 @@ class EditUser extends Component {
                                 className="user-edit-input"
                                 name="bio"
                                 onChange={this.handleChange}
-                                value={ this.state.user.bio }
+                                placeholder={
+                                    this.state.user.bio ?
+                                    this.state.user.bio :
+                                    "Enter bio here"
+                                }
                             />
                         </div>
                         <input 
@@ -116,6 +147,7 @@ class EditUser extends Component {
                         </div>
                     </div>
                 </form>
+                        {/* <button type="submit">Delete Account</button> */}
             </div>
         )
     }

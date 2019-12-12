@@ -10,9 +10,10 @@ const Games = () => {
 
     const [ games, setGames ] = useState([])
     const [ search, setSearch ] = useState([''])
-    const [ isLoading, setIsLoading ] = useState(false)
+    const [ isLoading, setIsLoading ] = useState(true)
 
     useEffect(() => {
+
         const fetchData = async () => {
             const games = await(await fetch(`https://www.boardgameatlas.com/api/search?name=${search}&limit=10&client_id=${process.env.REACT_APP_BGA_API_KEY}`)).json()
 
@@ -24,10 +25,13 @@ const Games = () => {
 
     const doGetGames = async () => {
         try {
+            setIsLoading(true)
+
             const games = await(await fetch(`https://www.boardgameatlas.com/api/search?name=${search}&fuzzy_match=true&client_id=${process.env.REACT_APP_BGA_API_KEY}`)).json()
             console.log(games)
 
             setGames(games.games)
+            setTimeout(() => setIsLoading(false), 300)
 
         } catch (error) {
             console.log(error)
@@ -60,7 +64,11 @@ const Games = () => {
                         {
                             games.map(game => 
                                 <div className="game-results">
-                                    {game.name}
+                                    <div className="game-header">
+                                        {game.name}
+                                        <br/>
+                                        Add to Library
+                                    </div>
                                     <Link to={`${GAMES}/${game.id}`}>
                                         {
                                             game.thumb_url 

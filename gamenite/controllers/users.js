@@ -31,10 +31,15 @@ router.get('/users/:userId', async(req, res) => {
 })
 
 router.put('/users/:userId', async (req, res) => {
+    console.log(req.body)
     const updatedUser = await User.findByIdAndUpdate(req.params.userId, req.body, {new: true})
     res.json(updatedUser)
 });
 
-
+router.delete('/users/:userId', (req, res) => {
+    return console.log(
+        `DELETE HTTP method on user/${req.params.userId} resource`,
+    );
+});
 
 module.exports = router
