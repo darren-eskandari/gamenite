@@ -1,16 +1,22 @@
 import React, { Component } from 'react'
+import { BeatLoader } from 'react-spinners'
+
+import './showGame.css'
+
 
 class ShowGame extends Component {
 
     state = {
         name: "",
-        img: "",
+        img: "", //imgURL
         minPlayers: "",
         maxPlayers: "",
         minPlaytime: "",
         maxPlaytime: "",
         description: "",
         description_preview: "",
+        // gameId: "",
+        isLoading: true
     }
 
     async componentDidMount() {
@@ -32,20 +38,31 @@ class ShowGame extends Component {
             maxPlaytime: gameJson.games[0].max_playtime,
             description: gameJson.games[0].description,
             description_preview: gameJson.games[0].description_preview,
+            isLoading: false
         })
+
     }
 
 
     render() {
         return (
             <div className="show-game">
-                <h3>{this.state.name}</h3>
-                <img src={this.state.img} alt="preview" />
-                Players: {this.state.minPlayers}-{this.state.maxPlayers}
-                Average Playtime: {this.state.minPlaytime}-{this.state.maxPlaytime}
-                <p>
+                <BeatLoader loading={this.state.isLoading}/>
+                <div className="game-header">
+                    <h3>{this.state.name}</h3>
+                    <small>Add to Library</small> 
+                </div>
+                <div className="game-img">
+                    <img src={this.state.img} alt="preview" />
+                </div>
+                <div className="game-info">
+                    Players: {this.state.minPlayers}-{this.state.maxPlayers}
+                    <br/>
+                    Average Playtime: {this.state.minPlaytime}-{this.state.maxPlaytime} min
+                </div>
+                <div className="game-desc">
                     {this.state.description_preview}
-                </p>
+                </div>
             </div>
         )
     }

@@ -38,7 +38,7 @@ class SignUp extends Component {
                       },
                 })
                 const createdUserToJson = await createdUser.json()
-                console.log(createdUserToJson)
+                this.props.doSetCurrentUser(createdUserToJson)
                 this.props.history.push(ROUTES.HOME)
             })
             .catch(error => {

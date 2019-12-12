@@ -6,7 +6,8 @@
   max-height: 200px;
   overflow: hidden;
   margin: auto;
-  width: 98%
+  width: 100%;
+  /* background-color: rbg(200,220,220); */
 }
 
 .imageCenterer {

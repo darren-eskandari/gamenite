@@ -1,6 +1,6 @@
-.game-results {
+.show-game {
     max-height: 250px;
-    max-width: 200px;
+    max-width: 85%;
     margin: auto;
 }
 

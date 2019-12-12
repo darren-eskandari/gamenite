@@ -1,0 +1,17 @@
+.nav {
+    display: flex;
+    background-color: rgb(68, 177, 250);
+    padding: 2px 4%;
+    margin: auto;
+    justify-content: space-evenly;
+}
+
+
+
+.nav-link {
+    margin: 10px 5px;
+    text-decoration: none;
+    color: white;
+    font-weight: bolder;
+    text-transform: capitalize;
+}

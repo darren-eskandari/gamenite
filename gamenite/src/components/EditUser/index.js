@@ -1,12 +1,16 @@
 import React, { Component } from 'react'
 import { withRouter, Link } from 'react-router-dom'
 import * as ROUTES from '../../constants/routes'
+import { auth } from '../../firebase/firebase'
 
 
 class EditUser extends Component {
 
     state = {
-        user: {}
+        user: {},
+        dob: '',
+        location: '',
+        bio: ''
     }
     
     async componentDidMount() {
@@ -18,26 +22,75 @@ class EditUser extends Component {
        })
     }
 
+    handleEdit = async(e) => {
+        e.preventDefault()
+        const editData = {
+            dob: this.state.dob,
+            location: this.state.location,
+            bio: this.state.bio
+        }
+        const editedUser = await fetch(`/auth/users/${this.props.currentUser._id}`, {
+            method: "PUT",
+            body: JSON.stringify(editData),
+            headers: {
+                'Content-Type': 'application/json'
+              },
+        })
+        const editedUserToJson = await editedUser.json()
+        console.log(editedUserToJson)
+        this.props.history.push(`${ROUTES.USERS}/${this.props.match.params.id}`)
+    }
+
+    handleDeleteUser = async (id) => {
+        id.preventDefault()
+        var deletedUser = auth.currentUser;
+        console.log(deletedUser)
+        deletedUser.delete().then(async () => {
+            this.props.history.push(ROUTES.HOME)
+            const deleteUser = await fetch(`/auth/users/${this.props.currentUser._id}`, {
+                method: "DELETE",
+                headers: {
+                    'Content-Type': 'application/json'
+                    },
+            })
+            
+        }).catch(function(error) {
+            console.log(error)
+        });
+        console.log('hitting delete for user ID:', this.props.currentUser._id)
+
+
+    }
+
+
+
+
+
     handleChange = (e) => {
         this.setState({
-          [e.currentTarget.name]: e.currentTarget.value
+            [e.currentTarget.name]: e.currentTarget.value
         })
-        console.log(e.currentTarget)
     }
 
     render() {
         return (
             <div className="user-edit">
-                <Link to={`${ROUTES.USERS}/${this.state.user.uid}`}>Cancel</Link>
-                <form className="edit-user-form">
+                <Link to={`${ROUTES.USERS}/${this.state.user.uid}`}>Cancel</Link>                 
 
-                    <div className="avatar">
-                        <img src="" alt="user pic"/>
-                    </div>
+                <div className="avatar">
+                    <img src="" alt="user pic"/>
+                </div>
+
+                <form onSubmit={this.handleDeleteUser}>
+                    <button type="submit">Delete Account</button>
+                </form>
                     
+                <form className="edit-user-form" onSubmit={this.handleEdit}>
+
                     <div className="user-info">
-                        <div class="user-info-keys-column">
-                            <div className="user-info-key">
+                        
+                        <div className="user-info-keys-column">
+                            <div className="user-info-key" >
                                 Display Name: 
                             </div>
                             <div className="user-info-key">
@@ -51,26 +104,12 @@ class EditUser extends Component {
                             </div>
                         </div>
 
-                        <div class="user-info-vals-column">
+                        <div className="user-info-vals-column">
                             <div className="user-info-val">
-                                {/* <input 
-                                    className="user-edit-input"
-                                    type="text"
-                                    name="displayName"
-                                    onChange={this.handleChange}
-                                    value= */}
-                                    { this.state.user.displayName }
-                                {/* /> */}
+                               { this.state.user.displayName }
                             </div>
                             <div className="user-info-val">
-                                {/* <input 
-                                    className="user-edit-input"
-                                    type="email"
-                                    name="email"
-                                    onChange={this.handleChange} 
-                                    value= */}
                                     { this.state.user.email }
-                                {/* /> */}
                             </div>
                             <div className="user-info-val">
                                 <input 
@@ -78,8 +117,6 @@ class EditUser extends Component {
                                     type="date"
                                     name="dob"
                                     onChange={this.handleChange}
-                                    value=
-                                    { this.state.user.dob }
                                 />
                             </div>
                             <div className="user-info-val">
@@ -88,8 +125,11 @@ class EditUser extends Component {
                                     type="text"
                                     name="location"
                                     onChange={this.handleChange}
-                                    placeholder="location"
-                                    value={ this.state.user.location }
+                                    placeholder={
+                                        this.state.user.location ?
+                                        this.state.user.location :
+                                        "location"
+                                    }
                                 />
                             </div>
                         </div>
@@ -102,19 +142,25 @@ class EditUser extends Component {
                                 className="user-edit-input"
                                 name="bio"
                                 onChange={this.handleChange}
-                                value={ this.state.user.bio }
+                                placeholder={
+                                    this.state.user.bio ?
+                                    this.state.user.bio :
+                                    "Enter bio here"
+                                }
                             />
                         </div>
-                        <input 
-                            type="submit" value="Edit Profile"
-                        />
+                        
+                        <button type="submit">Submit</button>
+
                         <div className="user-library">
                             My Games: 
                             <div className="user-game">
                                 (map of games)
                             </div>
                         </div>
+
                     </div>
+
                 </form>
             </div>
         )

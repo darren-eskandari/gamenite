@@ -21,7 +21,6 @@ class ShowUser extends Component {
         return(
             <div className="user-show">
                 <Link to={`${ROUTES.USERS}/${this.state.user.uid}/edit`}>Edit</Link>
-                
                 <div className="avatar">
                     <img src="" alt="user pic"/>
                 </div>

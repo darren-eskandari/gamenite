@@ -31,10 +31,20 @@ router.get('/users/:userId', async(req, res) => {
 })
 
 router.put('/users/:userId', async (req, res) => {
+    console.log(req.body)
     const updatedUser = await User.findByIdAndUpdate(req.params.userId, req.body, {new: true})
     res.json(updatedUser)
 });
 
-
+router.delete('/users/:userId', async (req, res) => {
+    try {
+        await User.findByIdAndRemove(req.params.userId);
+        res.json({message: "deleted"})
+        // foundUser.remove(req.params.userId);
+        // await foundUser.save();
+    } catch(err) {
+        console.log(err);
+    }
+});
 
 module.exports = router
