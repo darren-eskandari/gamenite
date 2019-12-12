@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { BeatLoader } from 'react-spinners'
 
+import './showGame.css'
 
 
 class ShowGame extends Component {
@@ -15,6 +16,7 @@ class ShowGame extends Component {
         description: "",
         description_preview: "",
         // gameId: "",
+        isLoading: true
     }
 
     async componentDidMount() {
@@ -36,16 +38,19 @@ class ShowGame extends Component {
             maxPlaytime: gameJson.games[0].max_playtime,
             description: gameJson.games[0].description,
             description_preview: gameJson.games[0].description_preview,
+            isLoading: false
         })
+
     }
 
 
     render() {
         return (
             <div className="show-game">
+                <BeatLoader loading={this.state.isLoading}/>
                 <div className="game-header">
                     <h3>{this.state.name}</h3>
-                    Add to Library
+                    <small>Add to Library</small> 
                 </div>
                 <div className="game-img">
                     <img src={this.state.img} alt="preview" />
@@ -53,7 +58,7 @@ class ShowGame extends Component {
                 <div className="game-info">
                     Players: {this.state.minPlayers}-{this.state.maxPlayers}
                     <br/>
-                    Average Playtime: {this.state.minPlaytime}-{this.state.maxPlaytime}
+                    Average Playtime: {this.state.minPlaytime}-{this.state.maxPlaytime} min
                 </div>
                 <div className="game-desc">
                     {this.state.description_preview}

@@ -36,10 +36,15 @@ router.put('/users/:userId', async (req, res) => {
     res.json(updatedUser)
 });
 
-router.delete('/users/:userId', (req, res) => {
-    return console.log(
-        `DELETE HTTP method on user/${req.params.userId} resource`,
-    );
+router.delete('/users/:userId', async (req, res) => {
+    try {
+        await User.findByIdAndRemove(req.params.userId);
+        res.json({message: "deleted"})
+        // foundUser.remove(req.params.userId);
+        // await foundUser.save();
+    } catch(err) {
+        console.log(err);
+    }
 });
 
 module.exports = router

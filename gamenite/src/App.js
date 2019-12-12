@@ -26,18 +26,16 @@ class App extends Component {
   }
 
   async componentDidMount() {
-    const user = await fetch('/api/v1/welcome')
-    const userToJson = await user.json()
-    this.setState({user: userToJson.user})
-
-    console.log(userToJson)
-
     auth.onAuthStateChanged(async authUser => {
       if(authUser) {
         const currentUser = await fetch(`/auth/users/${authUser.uid}`)
         const currentUserToJson = await currentUser.json()
         this.setState({ 
           currentUser: currentUserToJson[0]
+        })
+      } else {
+        this.setState({
+          currentUser: null
         })
       }
     })
@@ -67,16 +65,7 @@ class App extends Component {
     return (
 
       <div className="App">
-        <NavBar />
- 
-        {
-          currentUser
-          ? <div>
-              <Link to={`${ROUTES.USERS}/${currentUser.uid}`}>Welcome {currentUser.displayName}</Link>
-            <button onClick={this.signOut}>Sign Out</button>
-          </div>
-          : null
-        }
+        <NavBar currentUser={ this.state.currentUser } signOut={this.signOut} />
 
         <div className="welcome">
           <div className="imageCenterer">
@@ -84,7 +73,7 @@ class App extends Component {
           </div>
         </div>
         <Switch>
-          <Route exact path={ROUTES.HOME} render={() => <div>home</div>} />
+          <Route exact path={ROUTES.HOME} render={() => <div></div>} />
           <Route exact path={ROUTES.LOGIN} component={ Login } />
           <Route exact path={ROUTES.SIGN_UP} render={() =>  <SignUp doSetCurrentUser={this.doSetCurrentUser} />} />
           <Route exact path={`${ROUTES.USERS}/:id`} component={() => <ShowUser currentUser={this.state.currentUser}/>} />

@@ -67,7 +67,7 @@ const Games = () => {
                                     <div className="game-header">
                                         {game.name}
                                         <br/>
-                                        Add to Library
+                                        <small>Add to Library</small> 
                                     </div>
                                     <Link to={`${GAMES}/${game.id}`}>
                                         {

@@ -1,0 +1,9 @@
+.show-game {
+    max-height: 250px;
+    max-width: 85%;
+    margin: auto;
+}
+
+.game-thumb-img {
+    width: 150px
+}

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { withRouter, Link } from 'react-router-dom'
 import * as ROUTES from '../../constants/routes'
+import { auth } from '../../firebase/firebase'
 
 
 class EditUser extends Component {
@@ -40,11 +41,30 @@ class EditUser extends Component {
         this.props.history.push(`${ROUTES.USERS}/${this.props.match.params.id}`)
     }
 
-    handleDelete = async (id) => {
+    handleDeleteUser = async (id) => {
         id.preventDefault()
-        console.log('hitting delete')
-        
+        var deletedUser = auth.currentUser;
+        console.log(deletedUser)
+        deletedUser.delete().then(async () => {
+            this.props.history.push(ROUTES.HOME)
+            const deleteUser = await fetch(`/auth/users/${this.props.currentUser._id}`, {
+                method: "DELETE",
+                headers: {
+                    'Content-Type': 'application/json'
+                    },
+            })
+            
+        }).catch(function(error) {
+            console.log(error)
+        });
+        console.log('hitting delete for user ID:', this.props.currentUser._id)
+
+
     }
+
+
+
+
 
     handleChange = (e) => {
         this.setState({
@@ -61,7 +81,7 @@ class EditUser extends Component {
                     <img src="" alt="user pic"/>
                 </div>
 
-                <form onSubmit={this.handleDelete}>
+                <form onSubmit={this.handleDeleteUser}>
                     <button type="submit">Delete Account</button>
                 </form>
                     
