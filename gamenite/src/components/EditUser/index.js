@@ -23,7 +23,6 @@ class EditUser extends Component {
 
     handleEdit = async(e) => {
         e.preventDefault()
-        console.log('hitting edit', this.state)
         const editData = {
             dob: this.state.dob,
             location: this.state.location,
@@ -41,6 +40,12 @@ class EditUser extends Component {
         this.props.history.push(`${ROUTES.USERS}/${this.props.match.params.id}`)
     }
 
+    handleDelete = async (id) => {
+        id.preventDefault()
+        console.log('hitting delete')
+        
+    }
+
     handleChange = (e) => {
         this.setState({
             [e.currentTarget.name]: e.currentTarget.value
@@ -50,14 +55,20 @@ class EditUser extends Component {
     render() {
         return (
             <div className="user-edit">
-                <Link to={`${ROUTES.USERS}/${this.state.user.uid}`}>Cancel</Link>
+                <Link to={`${ROUTES.USERS}/${this.state.user.uid}`}>Cancel</Link>                 
+
+                <div className="avatar">
+                    <img src="" alt="user pic"/>
+                </div>
+
+                <form onSubmit={this.handleDelete}>
+                    <button type="submit">Delete Account</button>
+                </form>
+                    
                 <form className="edit-user-form" onSubmit={this.handleEdit}>
 
-                    <div className="avatar">
-                        <img src="" alt="user pic"/>
-                    </div>
-                    
                     <div className="user-info">
+                        
                         <div className="user-info-keys-column">
                             <div className="user-info-key" >
                                 Display Name: 
@@ -75,24 +86,10 @@ class EditUser extends Component {
 
                         <div className="user-info-vals-column">
                             <div className="user-info-val">
-                                {/* <input 
-                                    className="user-edit-input"
-                                    type="text"
-                                    name="displayName"
-                                    onChange={this.handleChange}
-                                    value= */}
-                                    { this.state.user.displayName }
-                                {/* /> */}
+                               { this.state.user.displayName }
                             </div>
                             <div className="user-info-val">
-                                {/* <input 
-                                    className="user-edit-input"
-                                    type="email"
-                                    name="email"
-                                    onChange={this.handleChange} 
-                                    value= */}
                                     { this.state.user.email }
-                                {/* /> */}
                             </div>
                             <div className="user-info-val">
                                 <input 
@@ -100,10 +97,6 @@ class EditUser extends Component {
                                     type="date"
                                     name="dob"
                                     onChange={this.handleChange}
-                                    // placeholder={
-                                    //     this.state.user.dob ?
-                                    //     this.state.user.dob 
-                                    // }
                                 />
                             </div>
                             <div className="user-info-val">
@@ -136,18 +129,19 @@ class EditUser extends Component {
                                 }
                             />
                         </div>
-                        <input 
-                            type="submit" value="Edit Profile"
-                        />
+                        
+                        <button type="submit">Submit</button>
+
                         <div className="user-library">
                             My Games: 
                             <div className="user-game">
                                 (map of games)
                             </div>
                         </div>
+
                     </div>
+
                 </form>
-                        {/* <button type="submit">Delete Account</button> */}
             </div>
         )
     }
